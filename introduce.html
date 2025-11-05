@@ -1,0 +1,192 @@
+
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Indie Game — Wireframe</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <header>
+    <div class="topbar container">
+      <div class="brand">Indie Game</div>
+      <nav aria-label="主導覽">
+        <ul>
+          <li><a href="index.html">What</a></li>
+          <li><a href="all games.html">A Game</a></li>
+          <li><a href="introduce.html" aria-current="page">introduce</a></li>
+        </ul>
+      </nav>
+    </div>
+    
+  </header>
+
+  <section class="hero">
+    <img class="hero-img" src="images/undertale-2.jpg" alt="Hero image">
+    <div class="hero-text">
+      <h1>Title</h1>
+      <p>game slogan</p>
+    </div>
+  </section>
+
+  <main>
+
+    <section class="creator">
+      <h2>imdependent game creator</h2>
+      <img class = "creator-img" src ="" alt="遊戲封面圖">
+      <p>description</p>
+    </section>
+
+
+    <div class = "introdution">
+      <article class="introdution-all" >
+        <div id = "viewport" class="introdution-viewport">
+
+          <div id="track" class="introdution-track" >
+
+            <article class="card reveal">
+              <div class="card-inner">
+
+                <h3 class="card-title">Card 1</h3>
+
+                <div class="card-body">
+
+                  <div class="thumb">
+                    <img src="images/undertale.jpg" alt="封面">
+                  </div>
+
+                  <div class="desc" lang="en">
+                    <p>description description description description description description description description description description description description description description description description description description description description description description description </p>
+                  </div>
+
+                </div>
+              </div>
+            </article>
+
+            <article class="card reveal">
+              <div class="card-inner">
+
+                <h3 class="card-title">Card 1</h3>
+
+                <div class="card-body">
+
+                  <div class="thumb">
+                    <img src="images/undertale.jpg" alt="封面">
+                  </div>
+
+                  <div class="desc" lang="en">
+                    <p>description description description description description description description description description description description description description description description description description description description description description description description </p>
+                  </div>
+
+                </div>
+              </div>
+            </article>
+
+            <article class="card reveal">
+              <div class="card-inner">
+
+                <h3 class="card-title">Card 1</h3>
+
+                <div class="card-body">
+
+                  <div class="thumb">
+                    <img src="images/undertale.jpg" alt="封面">
+                  </div>
+
+                  <div class="desc" lang="en">
+                    <p>description description description description description description description description description description description description description description description description description description description description description description description </p>
+                  </div>
+
+                </div>
+              </div>
+            </article>
+          </div>
+
+        </div>
+
+        <div class="introdution-controls">
+          <button class="btn" id="prev" aria-label="◀"></button>
+          <button class="btn" id="next" aria-label="▶"></button>
+        </div>
+
+      </article>
+
+    </div>
+
+    
+ 
+
+  </main>
+
+  <footer>
+    <div class="container">Footer</div>
+  </footer>
+
+  <script src="carousel.JS"></script>
+
+  <script>
+(() => {
+  const cards = document.querySelectorAll('.introdution .card');
+
+  cards.forEach(card => {
+    const inner = card.querySelector('.card-inner');
+
+    // 當滑鼠移動在卡片上
+    card.addEventListener('mousemove', e => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;     // 滑鼠在卡片內的 X
+      const y = e.clientY - rect.top;      // 滑鼠在卡片內的 Y
+      const midX = rect.width / 2;
+      const midY = rect.height / 2;
+
+      // 算出角度（數字可微調，越大越誇張）
+      const rotateX = ((y - midY) / midY) * -6;  // 上下反向
+      const rotateY = ((x - midX) / midX) * 6;   // 左右
+
+      inner.style.setProperty('--rx', `${rotateX}deg`);
+      inner.style.setProperty('--ry', `${rotateY}deg`);
+      inner.style.setProperty('--s', `1.05`);
+    });
+
+    // 滑鼠離開，重設角度
+    card.addEventListener('mouseleave', () => {
+      inner.style.setProperty('--rx', `0deg`);
+      inner.style.setProperty('--ry', `0deg`);
+      inner.style.setProperty('--s', `1`);
+    });
+  });
+})();
+</script>
+<script>
+(() => {
+  const items = [...document.querySelectorAll('.reveal')];
+
+  // 漂亮的交錯進場（0ms, 80ms, 160ms, ...）
+  items.forEach((el, i) => el.style.setProperty('--delay', `${i * 80}ms`));
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        
+        // io.unobserve(entry.target);
+      }
+    });
+  }, {
+    root: null,
+    threshold: 0.1,
+    rootMargin: '0px 0px -12% 0px'
+  });
+
+  items.forEach(el => io.observe(el));
+})();
+</script>
+
+</body>
+</html>
+
+
+
