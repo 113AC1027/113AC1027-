@@ -1,16 +1,18 @@
-
 <!doctype html>
 <html lang="zh-Hant">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Indie Game — Wireframe 起手式</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
+  <!-- ========== Header / Nav ========== -->
   <header>
     <div class="topbar container">
       <div class="brand">Indie Game</div>
+
       <nav aria-label="主導覽">
         <ul>
           <li><a href="index.html">What</a></li>
@@ -19,114 +21,181 @@
         </ul>
       </nav>
     </div>
-    
   </header>
 
+  <!-- ========== Hero ========== -->
   <section class="hero">
-    <img class="hero-img" src="images/" alt="Hero image">
+    <img class="hero-img" src="images/" alt="Hero image" />
     <div class="hero-text">
       <h1>Title</h1>
       <p>introduce this website</p>
     </div>
   </section>
 
+  <!-- ========== Main Content ========== -->
   <main>
     <section class="GameCard">
       <h3 class="tag">Games</h3>
+
       <div class="cards">
-        <article class="card card-media">
-          <div class="thumb">
-            <picture>
-              <source media="(max-width: 768px)" srcset="images/undertale-2.jpg">    <!--memo手機大小時換成 另一張圖 -->
-              <img src="images/undertale.jpg" alt="遊戲封面圖">
-            </picture>
+        <!-- ========== Game 1: UNDERTALE ========== -->
+        <article class="card game-card card-media">
+
+          <div class="card-left">
+
+            <div class="thumb">
+              <picture>
+                <!-- 手機時換圖 -->
+                <source media="(max-width: 768px)" srcset="images/undertale-2.jpg" />
+                <img src="images/undertale.jpg" alt="UNDERTALE cover" />
+              </picture>
+            </div>
+
+            <div class="tags">
+              <span class="tag-frame tag-c1">
+                <span class="tag-text"># ChoiceBasedStory</span>
+              </span>
+
+              <span class="tag-frame tag-c2">
+                <span class="tag-text"># PixelArt</span>
+              </span>
+
+              <span class="tag-frame tag-c3">
+                <span class="tag-text"># Emotional</span>
+              </span>
+            </div>
+
           </div>
-          <div class="card-text">
+          
+
+          <div class="card-right">
             <h3>UNDERTALE</h3>
-            <p><strong>Developer:</strong> Toby Fox
-                <strong>Release Year:</strong> 2015
-                <br><strong>Genre:</strong> Role-Playing Game (RPG)
-                <br><strong>Platforms:</strong> PC, Nintendo Switch, PlayStation 4, Xbox, Mobile
-                <br><strong>Description:</strong>
-                <br>The player accidentally falls into the Underground, a world inhabited by monsters.
-                <br>You can choose to fight or show mercy — every decision changes the story and leads to a different ending.
-                <br><strong>Features:</strong>
-                <br>Retro pixel-art style with innovative combat mechanics
-                <br>Highly recognizable soundtrack
-                <br>Memorable characters and emotional interactions
-                <br><strong>Keywords:</strong> #ChoiceBasedStory #PixelArt #Emotional</p>
+
+            <ul>
+              <li><strong>Developer:</strong> Toby Fox</li>
+              <li><strong>Release Year:</strong> 2015</li>
+              <li><strong>Genre:</strong> Role-Playing Game (RPG)</li>
+              <li><strong>Platforms:</strong> PC, Nintendo Switch, PlayStation 4, Xbox, Mobile</li>
+              <li>
+                <strong>Description:</strong>
+                <p>
+                  The player accidentally falls into the Underground, a world inhabited by monsters.
+                  You can choose to fight or show mercy — every decision changes the story and leads to a different ending.
+                </p>
+              </li>
+              <li>
+                <strong>Features:</strong>
+                <p>
+                  Retro pixel-art style with innovative combat mechanics<br />
+                  Highly recognizable soundtrack<br />
+                  Memorable characters and emotional interactions
+                </p>
+              </li>
+
+            </ul>
+
+            <a href="introduce.html" class="btn">Learn more</a>
+
           </div>
-          <a href="introduce.html" class="btn">Learn more</a>
+
         </article>
 
-        <article class="card card-media">
+        <!-- ========== Game 2: Hollow Knight ========== -->
+        <article class="card game-card card-media">
           <div class="thumb">
             <picture>
-              <source media="(max-width: 768px)" srcset="images/Hollow_Knight-2.png">
-              <img src="images/Hollow_Knight.png" alt="遊戲封面圖">
+              <source media="(max-width: 768px)" srcset="images/Hollow_Knight-2.png" />
+              <img src="images/Hollow_Knight.png" alt="Hollow Knight cover" />
             </picture>
           </div>
+
           <div class="card-text">
             <h3>Hollow Knight</h3>
-            <p><strong>Developer:</strong> Team Cherry
-              <br><strong>Release Year:</strong> 2017
-              <br><strong>Genre:</strong> Action-Adventure / Metroidvania
-              <br><strong>Platforms:</strong> PC, Nintendo Switch, PlayStation 4, Xbox
-              <br><strong>Description:</strong>
-                <br>The player takes the role of a silent knight exploring Hallownest, a ruined kingdom ruled by insects.
-                <br>As you journey deeper, you uncover the world’s hidden history and forgotten secrets.
-              <br><strong>Features:</strong>
-                <br>Hand-drawn art style with a rich and immersive world
-                <br>High freedom of exploration and smooth combat
-                <br>Deep atmosphere and captivating soundtrack
-                <br><strong>Keywords:</strong> #Adventure #Exploration #HandDrawnArt</p>
+
+            <ul>
+              <li><strong>Developer:</strong> Team Cherry</li>
+              <li><strong>Release Year:</strong> 2017</li>
+              <li><strong>Genre:</strong> Action-Adventure / Metroidvania</li>
+              <li><strong>Platforms:</strong> PC, Nintendo Switch, PlayStation 4, Xbox</li>
+              <li>
+                <strong>Description:</strong>
+                <p>
+                  The player takes the role of a silent knight exploring Hallownest, a ruined kingdom ruled by insects.
+                  As you journey deeper, you uncover the world’s hidden history and forgotten secrets.
+                </p>
+              </li>
+              <li>
+                <strong>Features:</strong>
+                <p>
+                  Hand-drawn art style with a rich and immersive world<br />
+                  High freedom of exploration and smooth combat<br />
+                  Deep atmosphere and captivating soundtrack
+                </p>
+              </li>
+              <li><strong>Keywords:</strong> #Adventure #Exploration #HandDrawnArt</li>
+            </ul>
           </div>
+
           <a href="" class="btn">Learn more</a>
         </article>
 
-        <article class="card card-media">
+        <!-- ========== Game 3: Hades ========== -->
+        <article class="card game-card card-media">
           <div class="thumb">
             <picture>
-              <source media="(max-width: 768px)" srcset="images/hades-2.jpg">
-              <img src="images/hades.jpg" alt="遊戲封面圖">
+              <source media="(max-width: 768px)" srcset="images/hades-2.jpg" />
+              <img src="images/hades.jpg" alt="Hades cover" />
             </picture>
           </div>
+
           <div class="card-text">
             <h3>Hades</h3>
-            <p><strong>Developer:</strong> Supergiant Games
-              <br><strong>Release Year:</strong> 2020
-              <br><strong>Genre:</strong> Action / Roguelike
-              <br><strong>Platforms:</strong> PC, Nintendo Switch, PlayStation 4, PlayStation 5, Xbox
-              <br><strong>Description:</strong>
-                <br>The player takes the role of Zagreus, the son of Hades, who attempts to escape the Underworld.
-                <br>Through countless deaths and rebirths, he meets and interacts with various gods of Greek mythology.
-              <br><strong>Features:</strong>
-                <br>Combines fast-paced roguelike combat with rich character-driven storytelling
-                <br>Each death advances the narrative, making every run feel meaningful
-                <br>Distinctive art style and outstanding voice acting
-                <br><strong>Keywords:</strong> #Action #Mythology #Rebirth</p>
+
+            <ul>
+              <li><strong>Developer:</strong> Supergiant Games</li>
+              <li><strong>Release Year:</strong> 2020</li>
+              <li><strong>Genre:</strong> Action / Roguelike</li>
+              <li><strong>Platforms:</strong> PC, Nintendo Switch, PlayStation 4, PlayStation 5, Xbox</li>
+              <li>
+                <strong>Description:</strong>
+                <p>
+                  The player takes the role of Zagreus, the son of Hades, who attempts to escape the Underworld.
+                  Through countless deaths and rebirths, he meets and interacts with various gods of Greek mythology.
+                </p>
+              </li>
+              <li>
+                <strong>Features:</strong>
+                <p>
+                  Combines fast-paced roguelike combat with rich character-driven storytelling<br />
+                  Each death advances the narrative, making every run feel meaningful<br />
+                  Distinctive art style and outstanding voice acting
+                </p>
+              </li>
+              <li><strong>Keywords:</strong> #Action #Mythology #Rebirth</li>
+            </ul>
           </div>
+
           <a href="" class="btn">Learn more</a>
         </article>
       </div>
-
-      
     </section>
 
+    <!-- ========== CTA / Support ========== -->
     <section id="support" class="section cta">
       <div class="container">
         <p>You see these game are so amazing</p>
         <h2>So how can we suppport these creator?</h2>
         <p>Go buy the game you stupid don't download the pirated version</p>
-        
       </div>
     </section>
   </main>
 
+  <!-- ========== Footer ========== -->
   <footer>
     <div class="container">Footer</div>
   </footer>
 </body>
 </html>
+
 
 

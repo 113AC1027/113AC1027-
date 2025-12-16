@@ -1,152 +1,140 @@
 (() => {
-  // =============== 抓元素 ===============
+  // ========= 0) Grab elements =========
   const viewport = document.getElementById('viewport');
-  const track    = document.getElementById('track');
-  const prev     = document.getElementById('prev');
-  const next     = document.getElementById('next');
+  const track = document.getElementById('track');
+  const prevBtn = document.getElementById('prev');
+  const nextBtn = document.getElementById('next');
 
-  // =============== 狀態變數 ===============
-  let index = 0;                 // 目前索引（包含 clone）
-  let afterMoveTimer = null;     // 後備計時器（確保 normalize 有跑）
+  // 如果頁面沒有輪播（或 id 不存在），就直接退出，避免報錯
+  if (!viewport || !track || !prevBtn || !nextBtn) return;
 
-  // =============== 工具：一頁顯示幾張 ===============
-  const visibleCount = () => {
+  // ========= 1) Config =========
+  const AUTOPLAY_MS = 3000;
+
+  // ========= 2) Helpers =========
+  const getVisibleCount = () => {
     const w = viewport.clientWidth;
-    return (w >= 768) ? 3 : 1;  // 平板/桌機=3；手機=1
+    if (w >= 1024) return 3;
+    if (w >= 768) return 2;
+    return 1;
   };
 
-  // =============== 工具：一張卡片寬度（含 gap） ===============
-  const cardWidth = () => {
-    const first = track.querySelector('.card');
-    if (!first) return 0;
+  const getCardWidth = () => {
+    const firstCard = track.querySelector('.card');
+    if (!firstCard) return 0;
+
     const gap = parseFloat(getComputedStyle(track).gap) || 0;
-    return first.getBoundingClientRect().width + gap;
+    return firstCard.getBoundingClientRect().width + gap;
   };
 
-  // =============== 中心卡標記（做出中間放大、左右後退的視覺） ===============
-  const markCenterCard = () => {
-    const cards = Array.from(track.querySelectorAll('.card'));
-    if (!cards.length) return;
+  const setTransform = (index, animate = true) => {
+    track.style.transition = animate ? 'transform .45s ease' : 'none';
+    const x = -index * getCardWidth();
+    track.style.transform = `translateX(${x}px)`;
+  };
 
-    const vpRect   = viewport.getBoundingClientRect();
-    const vpCenter = vpRect.left + vpRect.width / 2;
+  const removeOldClones = () => {
+    track.querySelectorAll('[data-clone="1"]').forEach(el => el.remove());
+  };
 
-    let best = Infinity, centerIdx = -1;
-    cards.forEach((c, i) => {
-      const r = c.getBoundingClientRect();
-      const cCenter = r.left + r.width / 2;
-      const d = Math.abs(cCenter - vpCenter);
-      if (d < best) { best = d; centerIdx = i; }
+  const getOriginalCards = () => {
+    return Array.from(track.querySelectorAll('.card:not([data-clone="1"])'));
+  };
+
+  // ========= 3) State =========
+  let index = 0; // 包含 clone 的索引
+  let autoplayTimer = null;
+
+  // ========= 4) Core =========
+  const setupClones = () => {
+    removeOldClones();
+
+    const originals = getOriginalCards();
+    const n = getVisibleCount();
+
+    if (originals.length === 0) return;
+
+    // 頭尾複製 n 張：做無限循環
+    const headClones = originals.slice(0, n).map(el => el.cloneNode(true));
+    const tailClones = originals.slice(-n).map(el => el.cloneNode(true));
+
+    tailClones.forEach(clone => {
+      clone.dataset.clone = '1';
+      track.insertBefore(clone, track.firstChild);
     });
 
-    cards.forEach(c => c.classList.remove('is-center','is-left','is-right'));
-    if (centerIdx >= 0) {
-      cards[centerIdx].classList.add('is-center');
-      if (cards[centerIdx - 1]) cards[centerIdx - 1].classList.add('is-left');
-      if (cards[centerIdx + 1]) cards[centerIdx + 1].classList.add('is-right');
-    }
+    headClones.forEach(clone => {
+      clone.dataset.clone = '1';
+      track.appendChild(clone);
+    });
+
+    // 從「第一張真卡」開始
+    index = n;
+    setTransform(index, false);
   };
 
-  // =============== 實際移動軌道 ===============
-  const updateTransform = (animate = true) => {
-    track.style.transition = animate ? 'transform .45s ease' : 'none';
-    const x = -index * cardWidth();
-    track.style.transform = `translateX(${x}px)`;
-    // 偵錯可留著：看位移/總數
-    // console.log({ index, cardWidth: cardWidth(), visible: visibleCount(), total: track.children.length, x });
-    markCenterCard();
-  };
+  const normalizeIndexIfNeeded = () => {
+    const n = getVisibleCount();
+    const total = track.children.length;
+    const realCount = total - 2 * n;
 
-  // =============== 無限循環的「環回」 ===============
-  const normalize = () => {
-    const total = track.children.length; // 含 clone
-    const n     = visibleCount();
-    const real  = total - 2 * n;         // 真卡數（= originals.length）
-
-    if (real <= 0) return;               // 沒做 clone 就不用環回
-
-    const jump = (newIndex) => {
-      requestAnimationFrame(() => {
-        track.style.transition = 'none';       // 關動畫 → 瞬移
-        index = newIndex;
-        track.style.transform = `translateX(${-index * cardWidth()}px)`;
-        requestAnimationFrame(() => {
-          track.style.transition = 'transform .45s ease'; // 再開回動畫
-        });
-      });
-    };
-
-    // 尾端越界 → 跳回第一個真卡
+    // 到尾端 clone：跳回真卡起點
     if (index >= total - n) {
-      jump(n);
+      index = n;
+      setTransform(index, false);
     }
-    // 前端越界 → 跳到最後一個真卡
-    else if (index < n) {
-      jump(n + real - 1);
+
+    // 到前端 clone：跳回真卡終點
+    if (index < n) {
+      index = n + realCount - 1;
+      setTransform(index, false);
     }
   };
 
-  // =============== 後備保險：每次移動後 500ms 再 normalize 一次 ===============
-  const afterMove = () => {
-    if (afterMoveTimer) clearTimeout(afterMoveTimer);
-    afterMoveTimer = setTimeout(() => {
-      normalize();
-      markCenterCard();
-      // console.log('[fallback] normalize called');
-    }, 500);
+  const goNext = () => {
+    index += 1;
+    setTransform(index, true);
   };
 
-  // =============== 建立首尾 clones（讓它可無限循環） ===============
-  const setupClones = () => {
-    // 先刪舊 clone
-    Array.from(track.children).forEach(el => { if (el.dataset.clone) el.remove(); });
-
-    const originals = Array.from(track.querySelectorAll('.card:not([data-clone])'));
-    const n = visibleCount();
-
-    // 重點：當「原始張數 < 可見張數」才不做循環；其餘（含 = ）都做
-    if (originals.length < n) {
-      index = 0;
-      updateTransform(false);
-      return;
-    }
-
-    // 在尾端加前 n 張的複製，在前端加後 n 張的複製
-    const head = originals.slice(0, n).map(el => el.cloneNode(true));
-    const tail = originals.slice(-n).map(el => el.cloneNode(true));
-    head.forEach(cl => { cl.dataset.clone = '1'; track.appendChild(cl); });
-    tail.forEach(cl => { cl.dataset.clone = '1'; track.insertBefore(cl, track.firstChild); });
-
-    index = n;                // 從第一張「真卡」開始
-    updateTransform(false);   // 初始化定位
+  const goPrev = () => {
+    index -= 1;
+    setTransform(index, true);
   };
 
-  // =============== 左右按鈕 ===============
-  const nextSlide = () => { index++; updateTransform(true); afterMove(); };
-  const prevSlide = () => { index--; updateTransform(true); afterMove(); };
+  // ========= 5) Autoplay =========
+  const stopAutoplay = () => {
+    if (autoplayTimer) clearInterval(autoplayTimer);
+    autoplayTimer = null;
+  };
 
-  next.addEventListener('click', nextSlide);
-  prev.addEventListener('click', prevSlide);
+  const startAutoplay = () => {
+    stopAutoplay();
+    autoplayTimer = setInterval(goNext, AUTOPLAY_MS);
+  };
 
-  // 動畫結束後做環回（並清掉後備計時器）
-  track.addEventListener('transitionend', (e) => {
-    if (e.target !== track) return;
-    if (afterMoveTimer) clearTimeout(afterMoveTimer);
-    normalize();
-    markCenterCard();
-    // console.log('[event] transitionend normalize');
-  });
+  // ========= 6) Events =========
+  nextBtn.addEventListener('click', goNext);
+  prevBtn.addEventListener('click', goPrev);
 
-  // 視窗尺寸變更 → 重新建 clone 與定位
+  // 動畫結束後，判斷是否落在 clone 區，需要瞬移回真卡
+  track.addEventListener('transitionend', normalizeIndexIfNeeded);
+
+  // RWD：尺寸改變要重建 clone + 重新定位
   window.addEventListener('resize', () => {
     setupClones();
-    markCenterCard();
   });
 
-  // =============== 初始化 ===============
+  // Hover / Touch：暫停自動播放
+  viewport.addEventListener('mouseenter', stopAutoplay);
+  viewport.addEventListener('mouseleave', startAutoplay);
+  viewport.addEventListener('touchstart', stopAutoplay, { passive: true });
+  viewport.addEventListener('touchend', startAutoplay, { passive: true });
+
+  // ========= 7) Init =========
   setupClones();
-  markCenterCard();
+  startAutoplay();
 })();
+
 
 
 

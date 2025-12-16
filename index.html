@@ -5,12 +5,15 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Indie Game — Wireframe 起手式</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
+  <!-- ========== Header / Nav ========== -->
   <header>
     <div class="topbar container">
       <div class="brand">Indie Game</div>
+
       <nav aria-label="主導覽">
         <ul>
           <li><a href="index.html" aria-current="page">What</a></li>
@@ -19,69 +22,67 @@
         </ul>
       </nav>
     </div>
-    
   </header>
 
+  <!-- ========== Hero ========== -->
   <section class="hero">
-    <img class="hero-img" src="images/" alt="Hero image">
+    <img class="hero-img" src="images/" alt="Hero image" />
     <div class="hero-text">
       <h1>Title</h1>
       <p>introduce this website</p>
     </div>
   </section>
 
+  <!-- ========== Main Content ========== -->
   <main>
+    <!-- 1) What is indie game -->
     <section class="HomeCard">
       <h2>What is imdependent game?</h2>
-      <p>An indie game is a video game created by individuals or small teams without the financial support of a major publisher.
-      Developers have full creative control over their projects, which allows them to explore unique ideas and experimental designs.
-      Although indie games are usually made with limited budgets, they often stand out for their creativity, storytelling, and emotional depth.</p>
+      <p>
+        An indie game is a video game created by individuals or small teams without the financial support of a major publisher.
+        Developers have full creative control over their projects, which allows them to explore unique ideas and experimental designs.
+        Although indie games are usually made with limited budgets, they often stand out for their creativity, storytelling, and emotional depth.
+      </p>
     </section>
 
+    <!-- 2) Why indie game is unique -->
     <section class="HomeCard">
       <h2>Why is independent game so unique?</h2>
-      <p>Independent games are unique because they are driven by creativity rather than profit.
-      Without pressure from large publishers, developers can take risks, tell personal stories, and experiment with gameplay.
-      This freedom allows indie games to explore new emotions, ideas, and artistic styles that big studios often avoid.</p>
+      <p>
+        Independent games are unique because they are driven by creativity rather than profit.
+        Without pressure from large publishers, developers can take risks, tell personal stories, and experiment with gameplay.
+        This freedom allows indie games to explore new emotions, ideas, and artistic styles that big studios often avoid.
+      </p>
     </section>
 
+    <!-- 3) Related events -->
     <section class="HomeCard">
-      <h2>About related events </h2>
-      <section class ="card-pic">
-        <p>Around the world, many events celebrate the creativity of indie game developers.
-  Famous examples include the <strong>Independent Games Festival (IGF)</strong>, 
-  <strong>BitSummit</strong> in Japan, and the <strong>Taipei Game Show Indie House</strong> in Taiwan.
-  These events give small teams a chance to showcase their work, meet other creators, and reach new audiences. </p>
-        <img class="HomeCard-img" src="images/Celeste-2.jpg" alt="image">
-        <img class="HomeCard-img" src="images/gris.jpg" alt="image">
-      </section>
+      <h2>About related events</h2>
+
+      <!-- 注意：section 裡面再放 section 語意上比較怪，改用 div 當排版容器 -->
+      <div class="card-pic">
+        <p>
+          Around the world, many events celebrate the creativity of indie game developers.
+          Famous examples include the <strong>Independent Games Festival (IGF)</strong>,
+          <strong>BitSummit</strong> in Japan, and the <strong>Taipei Game Show Indie House</strong> in Taiwan.
+          These events give small teams a chance to showcase their work, meet other creators, and reach new audiences.
+        </p>
+
+        <img class="HomeCard-img" src="images/Celeste-2.jpg" alt="Celeste image" />
+        <img class="HomeCard-img" src="images/gris.jpg" alt="GRIS image" />
+      </div>
     </section>
 
-
-      <!-- <div class="what-layout">
-        <div class="speech">
-          <p>Independent games are typically made by individuals or <br>small teams without the support of major publishers.</p>
-          <p>They emphasize creative freedom and unique experiences<br>and are commonly released on PC and digital platforms.</p>
-        </div>
-
-        <img class="pic p1" src="images/undertale 2.jpg" alt="">
-        <img class="pic p2" src="images/Hollow_Knight 2.png" alt="">
-        <img class="pic p3" src="images/Journey.jpg" alt="">
-        <img class="pic p4" src="images/Celeste 2.jpg" alt="">
-        <img class="pic p5" src="images/Spiritfarer 2.jpg" alt="">
-        <img class="pic p6" src="images/hades 2.jpg" alt="">
-      </div> -->
-
-    
-
-
-
+    <!--
+      舊版 what-layout 區塊（先保留註解）
+      之後要用再打開
+    -->
   </main>
 
+  <!-- ========== Footer ========== -->
   <footer>
     <div class="container">Footer</div>
   </footer>
 </body>
 </html>
-
 
