@@ -61,7 +61,7 @@
           <div id="track" class="introdution-track">
             
             <!-- Card 1 -->
-            <article class="card intro-card reveal">
+            <article class="card intro-card">
               <div class="card-inner">
                 <h3 class="card-title">Game Features</h3>
 
@@ -81,7 +81,7 @@
             </article>
 
             <!-- Card 2 -->
-            <article class="card intro-card reveal">
+            <article class="card intro-card">
               <div class="card-inner">
                 <h3 class="card-title">Story Highlights</h3>
 
@@ -101,7 +101,7 @@
             </article>
 
             <!-- Card 3 -->
-            <article class="card intro-card reveal">
+            <article class="card intro-card">
               <div class="card-inner">
                 <h3 class="card-title">Gameplay</h3>
 
@@ -138,63 +138,9 @@
   </footer>
 
   <!-- ========== Scripts ========== -->
-  <script src="carousel.JS"></script>
+  <script src="carousel.js"></script>
 
-  <!-- 卡片滑鼠視差 -->
-  <script>
-    (() => {
-      const cards = document.querySelectorAll('.introdution .card');
-
-      cards.forEach(card => {
-        const inner = card.querySelector('.card-inner');
-
-        card.addEventListener('mousemove', e => {
-          const rect = card.getBoundingClientRect();
-          const x = e.clientX - rect.left;
-          const y = e.clientY - rect.top;
-          const midX = rect.width / 2;
-          const midY = rect.height / 2;
-
-          const rotateX = ((y - midY) / midY) * -6;
-          const rotateY = ((x - midX) / midX) * 6;
-
-          inner.style.setProperty('--rx', `${rotateX}deg`);
-          inner.style.setProperty('--ry', `${rotateY}deg`);
-          inner.style.setProperty('--s', `1.05`);
-        });
-
-        card.addEventListener('mouseleave', () => {
-          inner.style.setProperty('--rx', `0deg`);
-          inner.style.setProperty('--ry', `0deg`);
-          inner.style.setProperty('--s', `1`);
-        });
-      });
-    })();
-  </script>
-
-  <!-- 捲動進場動畫 -->
-  <script>
-    (() => {
-      const items = [...document.querySelectorAll('.reveal')];
-
-      items.forEach((el, i) =>
-        el.style.setProperty('--delay', `${i * 80}ms`)
-      );
-
-      const io = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-          }
-        });
-      }, {
-        threshold: 0.1,
-        rootMargin: '0px 0px -12% 0px'
-      });
-
-      items.forEach(el => io.observe(el));
-    })();
-  </script>
+  
 </body>
 </html>
 

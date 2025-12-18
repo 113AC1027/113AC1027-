@@ -5,11 +5,10 @@
   const prevBtn = document.getElementById('prev');
   const nextBtn = document.getElementById('next');
 
-  // 如果頁面沒有輪播（或 id 不存在），就直接退出，避免報錯
   if (!viewport || !track || !prevBtn || !nextBtn) return;
 
   // ========= 1) Config =========
-  const AUTOPLAY_MS = 3000;
+  const AUTOPLAY_MS = 3200;
 
   // ========= 2) Helpers =========
   const getVisibleCount = () => {
@@ -19,18 +18,18 @@
     return 1;
   };
 
+  // 用 offsetWidth（不受 transform scale 影響）
   const getCardWidth = () => {
     const firstCard = track.querySelector('.card');
     if (!firstCard) return 0;
 
     const gap = parseFloat(getComputedStyle(track).gap) || 0;
-    return firstCard.getBoundingClientRect().width + gap;
+    return firstCard.offsetWidth + gap;
   };
 
-  const setTransform = (index, animate = true) => {
+  const setTransform = (i, animate = true) => {
     track.style.transition = animate ? 'transform .45s ease' : 'none';
-    const x = -index * getCardWidth();
-    track.style.transform = `translateX(${x}px)`;
+    track.style.transform = `translateX(${-i * getCardWidth()}px)`;
   };
 
   const removeOldClones = () => {
@@ -41,8 +40,34 @@
     return Array.from(track.querySelectorAll('.card:not([data-clone="1"])'));
   };
 
+  const clearCenterClasses = () => {
+    track.querySelectorAll('.card').forEach(card => {
+      card.classList.remove('is-center', 'is-left', 'is-right');
+    });
+  };
+
+  const applyCenterClasses = () => {
+    const n = getVisibleCount();
+    const cards = Array.from(track.children);
+
+    clearCenterClasses();
+
+    // index 是目前「左邊第一張可見卡」的位置
+    // 桌機 n=3 → 中間是 index+1
+    // 平板 n=2/手機 n=1 → 我們讓 index 當作 center（避免難判斷）
+    const centerIndex = (n >= 3) ? (index + 1) : index;
+
+    const center = cards[centerIndex];
+    const left = cards[centerIndex - 1];
+    const right = cards[centerIndex + 1];
+
+    if (center) center.classList.add('is-center');
+    if (left) left.classList.add('is-left');
+    if (right) right.classList.add('is-right');
+  };
+
   // ========= 3) State =========
-  let index = 0; // 包含 clone 的索引
+  let index = 0;
   let autoplayTimer = null;
 
   // ========= 4) Core =========
@@ -51,10 +76,8 @@
 
     const originals = getOriginalCards();
     const n = getVisibleCount();
-
     if (originals.length === 0) return;
 
-    // 頭尾複製 n 張：做無限循環
     const headClones = originals.slice(0, n).map(el => el.cloneNode(true));
     const tailClones = originals.slice(-n).map(el => el.cloneNode(true));
 
@@ -68,9 +91,9 @@
       track.appendChild(clone);
     });
 
-    // 從「第一張真卡」開始
-    index = n;
+    index = n;                 // 從第一張真卡開始
     setTransform(index, false);
+    applyCenterClasses();
   };
 
   const normalizeIndexIfNeeded = () => {
@@ -78,27 +101,31 @@
     const total = track.children.length;
     const realCount = total - 2 * n;
 
-    // 到尾端 clone：跳回真卡起點
+    // 到尾端 clone → 瞬移回真卡起點
     if (index >= total - n) {
       index = n;
       setTransform(index, false);
     }
 
-    // 到前端 clone：跳回真卡終點
+    // 到前端 clone → 瞬移回真卡終點
     if (index < n) {
       index = n + realCount - 1;
       setTransform(index, false);
     }
+
+    applyCenterClasses();
   };
 
   const goNext = () => {
     index += 1;
     setTransform(index, true);
+    applyCenterClasses();
   };
 
   const goPrev = () => {
     index -= 1;
     setTransform(index, true);
+    applyCenterClasses();
   };
 
   // ========= 5) Autoplay =========
@@ -116,15 +143,12 @@
   nextBtn.addEventListener('click', goNext);
   prevBtn.addEventListener('click', goPrev);
 
-  // 動畫結束後，判斷是否落在 clone 區，需要瞬移回真卡
   track.addEventListener('transitionend', normalizeIndexIfNeeded);
 
-  // RWD：尺寸改變要重建 clone + 重新定位
   window.addEventListener('resize', () => {
     setupClones();
   });
 
-  // Hover / Touch：暫停自動播放
   viewport.addEventListener('mouseenter', stopAutoplay);
   viewport.addEventListener('mouseleave', startAutoplay);
   viewport.addEventListener('touchstart', stopAutoplay, { passive: true });
@@ -134,6 +158,7 @@
   setupClones();
   startAutoplay();
 })();
+
 
 
 

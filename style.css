@@ -489,10 +489,11 @@ footer{
   width: min(100% - 2rem, 1300px);
   margin: 40px auto;
   overflow: clip;
+  padding: 24px 0
 }
 
 .introdution-all{
-  overflow: visible;
+  overflow: visible !important;
   position: relative;
   overflow: hidden;
   width: min(90%, 1200px);
@@ -513,8 +514,10 @@ footer{
 }
 
 .introdution-viewport{
-  overflow:hidden;
+  overflow:visible !important;
   width:100%;
+  height: auto !important;
+  padding-top: 28px;
 }
 
 .introdution-track{
@@ -528,44 +531,37 @@ footer{
 /* ✅ 第三頁輪播卡：改成 intro-card */
 .introdution .intro-card{
   flex: 0 0 calc((100% - 32px) / 3);
-  box-sizing:border-box;
+  box-sizing: border-box;
   background:#004655;
-  border:none;
   border-radius:14px;
   box-shadow:0 6px 16px rgba(0,0,0,.2);
-  overflow: visible;
+
   display:flex;
-
-  perspective:800px;
-  transform-style: preserve-3d;
-
   position:relative;
-  transition: transform .35s ease, box-shadow .35s ease, opacity .35s ease;
-  will-change: transform;
-
   height:500px;
+
+  transition:
+    transform .35s ease,
+    box-shadow .35s ease,
+    opacity .35s ease;
+
+  will-change: transform;
 }
 
-.introdution .intro-card:not(.is-center){
-  transform: scale(.96);
-  opacity: .85;
-}
-
-.introdution .intro-card.is-center{
-  transform: translateY(-8px) scale(1.07);
-  opacity:1;
-  z-index:3;
-  box-shadow: 0 16px 28px rgba(0,0,0,.25);
-}
-
-.introdution .intro-card.is-left{
-  transform: translateX(-12px) scale(.96);
-  z-index:2;
-}
-
+/* 左右卡：刻意縮小、淡一點 */
+.introdution .intro-card.is-left,
 .introdution .intro-card.is-right{
-  transform: translateX(12px) scale(.96);
-  z-index:2;
+  transform: scale(.88);
+  opacity: .6;
+  z-index: 1;
+}
+
+/* 中間卡：回到正常尺寸 + 再放大 */
+.introdution .intro-card.is-center{
+  transform: translateY(-16px) scale(1.15);
+  opacity: 1;
+  z-index: 3;
+  box-shadow: 0 22px 40px rgba(0,0,0,.35);
 }
 
 .introdution-track{ overflow: visible; }
@@ -585,6 +581,22 @@ footer{
   transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) scale(var(--s,1));
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
+
+/* 讓中間更立體：只放大 inner，避免輪播距離計算抖動 */
+.introdution .intro-card .card-inner{
+  transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) scale(1);
+}
+
+.introdution .intro-card.is-center .card-inner{
+  transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) scale(1.12);
+}
+
+.introdution .intro-card.is-left .card-inner,
+.introdution .intro-card.is-right .card-inner{
+  transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) scale(.96);
+  opacity: .9;
+}
+
 
 .introdution .intro-card:hover .card-inner{
   transform: scale(1.05);
