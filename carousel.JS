@@ -13,9 +13,8 @@
   // ========= 2) Helpers =========
   const getVisibleCount = () => {
     const w = viewport.clientWidth;
-    if (w >= 1024) return 3;
-    if (w >= 768) return 2;
-    return 1;
+    if (w >= 1024) return 3;  // desktop
+    return 1;                 // tablet + mobile
   };
 
   // 用 offsetWidth（不受 transform scale 影響）

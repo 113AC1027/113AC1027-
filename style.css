@@ -151,8 +151,8 @@ nav [aria-current="page"]{
   background: linear-gradient(
     to top,
     rgba(8, 8, 71, 8) 0%,
-    rgba(8, 8, 71, 4) 40%,
-    rgba(0, 0, 0, 0) 80%
+    /* rgba(8, 8, 71, 4) 40%, */
+    rgba(0, 0, 0, 0) 75%
   );
 }
 
@@ -484,51 +484,77 @@ footer{
   box-shadow:0 6px 20px rgba(255, 255, 255, 0.1);
 }
 
-/* Carousel container */
-.introdution{
-  width: min(100% - 2rem, 1300px);
-  margin: 40px auto;
-  overflow: clip;
-  padding: 24px 0
-}
+/* ==================================================
+   7) Introduce Page (Single Game) + Carousel (FULLBLEED EDGES)
+   ================================================== */
 
-.introdution-all{
-  overflow: visible !important;
+/* Carousel section: full width for screen-edge fade */
+.introdution.is-fullbleed{
+  width: 100%;
+  margin: 40px 0;
+  padding: 24px 0;
   position: relative;
-  overflow: hidden;
-  width: min(90%, 1200px);
-  margin: 0 auto;
-
-  mask-image: linear-gradient(
-    to right,
-    transparent 0, rgba(0,0,0,.7) 24px,
-    rgba(0,0,0,1) calc(100% - 24px),
-    transparent 100%
-  );
-  -webkit-mask-image: linear-gradient(
-    to right,
-    transparent 0, rgba(0,0,0,.7) 24px,
-    rgba(0,0,0,1) calc(100% - 24px),
-    transparent 100%
-  );
+  overflow: visible;     /* 允許中間卡片往上放大 */
 }
 
+/* Centered content container (your actual carousel width) */
+.introdution-all{
+  width: min(100% - 2rem, 1300px);
+  margin: 0 auto;
+  position: relative;
+  overflow: visible;     /* 不裁切放大 */
+  z-index: 1;
+}
+
+/* Viewport / Track */
 .introdution-viewport{
-  overflow:visible !important;
-  width:100%;
-  height: auto !important;
-  padding-top: 28px;
+  width: 100%;
+  overflow: visible;
+  padding-top: 30px;     /* 給中間卡片往上放大的空間 */
+  position: relative;
+  z-index: 1;
 }
 
 .introdution-track{
   display:flex;
   gap:16px;
-  will-change:transform;
+  will-change: transform;
   transition: transform 0.45s ease;
   overflow: visible;
+  position: relative;
+  z-index: 1;
 }
 
-/* ✅ 第三頁輪播卡：改成 intro-card */
+/* Screen-edge fades (stick to viewport edges) */
+.edge-fade{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 200px;          /* 淡出寬度，可調 */
+  z-index: 99999;        /* 一定在最上 */
+  pointer-events: none;
+}
+
+/* 用你頁面背景色去淡出（#080847） */
+.edge-fade-left{
+  left: 0;
+  background: linear-gradient(to right,
+    rgba(8,8,71,1) 0%,
+    rgba(8,8,71,.9) 35%,
+    rgba(8,8,71,0) 100%
+  );
+}
+
+.edge-fade-right{
+  right: 0;
+  background: linear-gradient(to left,
+    rgba(8,8,71,1) 0%,
+    rgba(8,8,71,.9) 35%,
+    rgba(8,8,71,0) 100%
+  );
+}
+
+/* Intro cards */
 .introdution .intro-card{
   flex: 0 0 calc((100% - 32px) / 3);
   box-sizing: border-box;
@@ -538,17 +564,38 @@ footer{
 
   display:flex;
   position:relative;
-  height:500px;
+  height:400px ;
+  /* aspect-ratio: 16 / 9; */
 
-  transition:
-    transform .35s ease,
-    box-shadow .35s ease,
-    opacity .35s ease;
-
+  transition: transform .35s ease, box-shadow .35s ease, opacity .35s ease;
   will-change: transform;
+
+  padding: 16px !important;
 }
 
-/* 左右卡：刻意縮小、淡一點 */
+@media (min-width: 1025px){
+  .introdution .intro-card{
+    height: 400px !important;
+    aspect-ratio: auto !important;
+  }
+}
+
+@media (max-width: 1024px){
+  .introdution .intro-card{
+    flex: 0 0 100%;
+    height: 400px !important;
+    aspect-ratio: auto !important;
+  }
+}
+
+@media (max-width: 768px){
+  .introdution .intro-card{
+    height: auto !important;
+    aspect-ratio: 4 / 5 !important;
+  }
+}
+
+/* side cards */
 .introdution .intro-card.is-left,
 .introdution .intro-card.is-right{
   transform: scale(.88);
@@ -556,7 +603,7 @@ footer{
   z-index: 1;
 }
 
-/* 中間卡：回到正常尺寸 + 再放大 */
+/* center card */
 .introdution .intro-card.is-center{
   transform: translateY(-16px) scale(1.15);
   opacity: 1;
@@ -564,45 +611,16 @@ footer{
   box-shadow: 0 22px 40px rgba(0,0,0,.35);
 }
 
-.introdution-track{ overflow: visible; }
-
-/* 3D inner */
+/* inner layout */
 .introdution .card-inner{
-  width:92%;
-  max-width:760px;
-  margin: 12px auto 16px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  transform: rotateX(0deg) rotateY(0deg);
+  width:100%;
+  max-width: none !important;;
+  margin: 0;
   border-radius:14px;
-  overflow:hidden;
+  overflow: visible; /* 不要在這裡裁切，避免「被吃掉」錯覺 */
 }
 
-.introdution .card-inner{
-  transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) scale(var(--s,1));
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-/* 讓中間更立體：只放大 inner，避免輪播距離計算抖動 */
-.introdution .intro-card .card-inner{
-  transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) scale(1);
-}
-
-.introdution .intro-card.is-center .card-inner{
-  transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) scale(1.12);
-}
-
-.introdution .intro-card.is-left .card-inner,
-.introdution .intro-card.is-right .card-inner{
-  transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) scale(.96);
-  opacity: .9;
-}
-
-
-.introdution .intro-card:hover .card-inner{
-  transform: scale(1.05);
-  box-shadow: 0 18px 30px rgba(0,0,0,0.25);
-}
-
+/* Title + body */
 .introdution .card-title{
   margin: .2rem auto .8rem;
   font-size: clamp(18px, 2vw, 22px);
@@ -613,15 +631,16 @@ footer{
 
 .introdution .card-body{
   display:grid;
-  grid-template-columns: clamp(140px, 36%, 220px) 1fr;
-  gap:25px;
+  grid-template-columns: clamp(180px, 32%, 240px) 1fr !important;
+  gap:16px !important;
+  align-items: center;
   min-width:0;
 }
 
 .introdution .thumb{
-  aspect-ratio: 4 / 6;
+  aspect-ratio: 3 / 4;
   width:100%;
-  overflow:hidden;
+  overflow:hidden;     /* 圖片圓角在這層裁就好 */
   border-radius:8px;
   align-self:center;
 }
@@ -632,8 +651,6 @@ footer{
   object-fit:cover;
   display:block;
 }
-
-.introdution .card-body, .introdution .desc{ overflow: visible; }
 
 .introdution .desc{
   text-align:left;
@@ -649,70 +666,46 @@ footer{
   hyphens: auto;
 }
 
-/* RWD */
-@media (min-width: 768px){
+@media (max-width: 768px){
+  /* 卡片改直向 */
   .introdution .intro-card{
-    flex-basis: calc((100% - 32px) / 3);
+    aspect-ratio: 3 / 4;   /* 直長方形感（可改 4/5 更長） */
+  }
+
+  /* 變成上圖下文 */
+  .introdution .card-body{
+    display: flex !important;
+    flex-direction: column !important;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    align-items: center ;
+  }
+
+  /* 手機圖小一點，不要佔太多 */
+  .introdution .thumb{
+    width: min(78%, 260px) !important;
+    margin: 0 auto;
+    aspect-ratio: 4 / 3; /* 手機上圖別太長 */
+  }
+
+  .introdution .desc{
+    width: 100% !important;
+    text-align: left !important;
   }
 }
 
-@media (max-width:767.98px){
-  .introdution .card-body{ grid-template-columns: 1fr; }
-  .introdution .thumb{ margin-bottom: 8px; }
+@media (max-width: 1024px){
+  .fade{ display: none !important; }
 }
 
-@media (max-width: 767.98px){
-  .introdution .intro-card{ flex: 0 0 100%; }
-}
-
-/* Reveal animation */
-.reveal{
-  opacity:0;
-  transform: translateY(18px) scale(.98);
-  transition:
-    opacity .6s ease,
-    transform .6s cubic-bezier(.2,.7,.2,1);
-  transition-delay: var(--delay, 0ms);
-  will-change: opacity, transform;
-}
-
-.reveal.is-visible{
-  opacity:1;
-  transform:none;
-}
-
-.reveal .thumb, .reveal .desc, .reveal .card-title{
-  opacity:0;
-  transform: translateY(6px);
-  transition:
-    opacity .45s ease .15s,
-    transform .45s ease .15s;
-}
-
-.reveal.is-visible .thumb,
-.reveal.is-visible .desc,
-.reveal.is-visible .card-title{
-  opacity:1;
-  transform:none;
-}
-
-@media (prefers-reduced-motion: reduce){
-  .reveal,
-  .reveal .thumb,
-  .reveal .desc,
-  .reveal .card-title{
-    transition:none !important;
-    opacity:1 !important;
-    transform:none !important;
-  }
-}
-
-/* Carousel controls */
+/* Controls */
 .introdution-controls{
   display:flex;
   justify-content:center;
   gap:12px;
-  margin-top:12px;
+  margin-top:40px;
+  position: relative;
+  z-index: 10;
 }
 
 .introdution .btn{
@@ -729,6 +722,97 @@ footer{
   filter:brightness(1.1);
 }
 
+/* RWD */
+@media (max-width: 767.98px){
+  .introdution .intro-card{ flex: 0 0 100%; }
+  .introdution .card-body{ grid-template-columns: 1fr; }
+  .introdution .thumb{ margin-bottom: 8px; }
+}
+
+@media (max-width: 1024px){
+  .fade{ display: none !important; }
+}
+
+.introdution-all{
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+}
+
+
+
+/* 2) 關掉可能還殘留的偽元素漸層 */
+.introdution-all::before,
+.introdution-all::after,
+.introdution-viewport::before,
+.introdution-viewport::after{
+  content: none !important;
+  display: none !important;
+}
+
+/* 3) 如果你之前用過 edge-fade（新命名），也一起關掉 */
+.edge-fade{
+  display: none !important;
+}
+
+
+.edge-fade{ display:none !important; }
+
+@media (min-width: 1025px){
+  .introdution.is-fullbleed{ position: relative; }
+
+  .edge-fade{
+    display:block !important;
+    position:absolute !important;  /* ← 改成 absolute */
+    top:0 !important;
+    bottom:0 !important;
+    width: 120px !important;       /* ← 先收窄，避免你說的太寬 */
+    z-index: 50 !important;
+    pointer-events:none !important;
+  }
+
+  .edge-fade-left{
+    left:0 !important;
+    background: linear-gradient(to right,
+      rgba(8,8,71,1) 0%,
+      rgba(8,8,71,.9) 45%,
+      rgba(8,8,71,0) 100%
+    ) !important;
+  }
+
+  .edge-fade-right{
+    right:0 !important;
+    background: linear-gradient(to left,
+      rgba(8,8,71,1) 0%,
+      rgba(8,8,71,.9) 45%,
+      rgba(8,8,71,0) 100%
+    ) !important;
+  }
+}
+
+@media (max-width: 1024px){
+  .introdution{
+    padding: 24px 16px !important;   /* 整段左右留白 */
+  }
+
+  .introdution-viewport{
+    padding: 20px 0 !important;
+  }
+
+  .introdution .intro-card{
+    height: 440px !important;        /* 單張模式稍微高一點 */
+    margin: 0 auto !important;
+  }
+
+  .introdution .intro-card{
+    padding: 16px !important;        /* 卡片內距，避免內容貼邊 */
+  }
+
+  .introdution .card-body{
+    grid-template-columns: clamp(180px, 38%, 260px) 1fr !important;
+    gap: 16px !important;
+  }
+}
+
 #prev{ left: 8px; }
 #next{ right: 8px; }
 
@@ -737,6 +821,8 @@ footer{
   color:#fff;
   background:#000000;
 }
+
+
 
 
 
