@@ -11,13 +11,13 @@
   <!-- ========== Header / Nav ========== -->
   <header>
     <div class="topbar container">
-      <div class="brand">TUNA Company</div>
+      <div class="brand">Indie Game</div>
 
-      <nav aria-label="主導覽">
+      <nav aria-label="主導覽" class="main-nav">
         <ul>
-          <li><a href="index.html" >Main Page</a></li>
-          <li><a href="all games.html" aria-current="page">Game List</a></li>
-          <li><a href="introduce.html">About</a></li>
+          <li><a href="index.html" class="nav-link">HOME</a></li>
+          <li><a href="all games.html" aria-current="page" class="nav-link active">Games</a></li>
+          <li><a href="introduce.html" class="nav-link">introduce</a></li>
         </ul>
       </nav>
     </div>
@@ -25,10 +25,15 @@
 
   <!-- ========== Hero ========== -->
   <section class="hero">
-    <img class="hero-img" src="images/" alt="Hero image" />
+    <img class="hero-img" src="images/封面.jpg" alt="Hero image" />
     <div class="hero-text">
       <h1>Title</h1>
       <p>introduce this website</p>
+    </div>
+
+    <div class="scroll-hint">
+      <p class="scroll-text">Scroll down</p>
+      <span class="scroll-arrow">≫</span>
     </div>
   </section>
 
@@ -76,12 +81,12 @@
               <li><strong>Release Year:</strong> 2015</li>
               <li><strong>Genre:</strong> Role-Playing Game (RPG)</li>
               <li><strong>Platforms:</strong> PC, Nintendo Switch, PlayStation 4, Xbox, Mobile</li> -->
-              <li>
+              <ul>
                 <p>
                   The player accidentally falls into the Underground, a world inhabited by monsters.
                   You can choose to fight or show mercy — every decision changes the story and leads to a different ending.
                 </p>
-              </li>
+              </ul>
               <!-- <li>
                 <strong>Features:</strong>
                 <p>
@@ -215,6 +220,8 @@
         </article>
       </div>
     </section>
+
+    <script src="scroll-reveal.js"></script>
 
     <!-- ========== CTA / Support ========== -->
     <section id="support" class="section cta">

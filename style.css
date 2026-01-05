@@ -52,20 +52,34 @@ p{ margin:.25rem 0; }
 
 /* Button */
 .btn{
-  display:inline-block;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap: .4rem;
+
   background-color:#15F5BA;
   color:#080847;
   padding:.75rem 2rem;
   border-radius:999px;
   text-decoration:none;
-  border:1px solid 0.2px;
+  border:1px solid rgba(0,0,0,0.2);
   font-weight:600;
+
+  transition: transform .18s ease, filter .18s ease, box-shadow .18s ease, background-color .18s ease;
+  will-change: transform;
 }
 
 .btn:hover{
   background-color:#81fef7;
-  transform: scale(1.05);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  transform: translateY(-2px) scale(1.06);
+  filter: brightness(1.05);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.28);
+}
+
+/* 鍵盤可用性：tab 到按鈕會有清楚的外框 */
+.btn:focus-visible{
+  outline: 3px solid rgba(21,245,186,0.55);
+  outline-offset: 3px;
 }
 
 /* ==================================================
@@ -110,6 +124,48 @@ nav [aria-current="page"]{
 
 .topbar a:hover{ opacity:1; }
 
+.main-nav{
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-link{
+  position: relative;
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  font-weight: 500;
+  padding: .25rem 0;
+
+  transition: color .2s ease;
+}
+.nav-link:hover,
+.nav-link.active{
+  color: #ffffff;
+}
+
+.nav-link{
+  padding: .35rem .9rem;
+  border-radius: 10px;
+}
+
+.nav-link:hover{
+  background-color: rgba(21, 245, 185, 0.212);
+}
+
+.nav-link.active{
+  background-color: rgba(21, 245, 185, 0.263);
+  border: 2.2px solid #a0edd8bb;
+  border-radius: 7px;
+}
+
+.nav-link:hover{
+  transform: translateY(-2px);
+}
+
+.nav-link{
+  transition: color .2s ease, background-color .2s ease, transform .2s ease;
+}
+
 /* ==================================================
    3) Hero (All pages)
    ================================================== */
@@ -138,9 +194,10 @@ nav [aria-current="page"]{
   justify-content:center;
   color:#fff;
   padding: min(10vw, 40px) 20px;
-  gap:1rem;
+  gap:0;
   z-index:2;
-  text-align: center;
+  max-width: 65%;
+  margin: 0 auto;
 }
 
 .hero::after{
@@ -164,19 +221,78 @@ nav [aria-current="page"]{
 
 .hero-text h1{
   margin:0 !important;
-  line-height:20px;
+  line-height:1.05;
+  font-size: 40px;
   color:#15F5BA;
 }
 
 .hero-text p{
   margin:0 !important;
   line-height:1.25;
-  font-size:17px;
+  font-size:20px;
   color:#fff;
+  text-align: center;
+}
+/*手機*/
+@media (max-width: 768px){
+  .hero-text h1{ 
+    font-size: 28px;
+    line-height: 1.2;
+  }
+  .hero-text p{
+    font-size: 14px;
+    line-height: 1.6;
+    /* max-width: 90%;
+    margin: 0 auto; */
+  }
+}
+/*平板*/
+@media (max-width: 1024px){
+  .hero-text h1{ 
+    line-height: 1.1;
+    font-size: 36px; 
+  }
+  .hero-text p{
+    font-size: 16px;
+    line-height: 1.6;
+    max-width: 80%;
+  }
 }
 
-@media (min-width: 768px){
-  .hero-text h1{ line-height:1.02; }
+/* ===== 箭頭 ===== */
+.scroll-hint{
+  /* margin-top: 2.5rem; */
+  font-size: 3rem;
+  color: rgba(255, 255, 255, 0.604);
+  text-align: center;
+
+  position: absolute;
+  bottom: 6rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+
+  animation: scrollBounce 1.6s ease-in-out infinite;
+}
+
+.scroll-text{
+  font-size: 1rem;
+  letter-spacing: .12em;
+  color: rgba(255,255,255,0.45);
+}
+.scroll-arrow{
+  display: inline-block;
+  font-size: 4rem;
+  color: rgba(255,255,255,0.65);
+  transform: rotate(90deg); /* 只轉箭頭 */
+  display: block;
+}
+
+/* 上下浮動動畫 */
+@keyframes scrollBounce{
+  0%   { transform: translateX(-50%) translateY(0); }
+  50%  { transform: translateX(-50%) translateY(8px); }
+  100% { transform: translateX(-50%) translateY(0); }
 }
 
 /* ==================================================
@@ -187,20 +303,18 @@ nav [aria-current="page"]{
   margin: 0 auto;
   margin-top: 300px;
   margin-bottom: 100px;
-  width:75%;
+  width:60%;
   text-align:left;
 }
 
 .HomeCard h2{
   justify-content:left;
   color:#15F5BA;
-  text-shadow: 5px 5px 5px black;
 }
 
 .HomeCard p{
   justify-content:left;
   color:#fff;
-  font-size:0.9rem;
 }
 
 .card-pic{
@@ -257,6 +371,33 @@ nav [aria-current="page"]{
   }
 }
 
+/* .next-section{
+  margin-top: 6rem;
+  padding: 4rem 0;
+  text-align: center;
+
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0),
+    rgba(0,0,0,0.35)
+  );
+} */
+
+.next-label{
+  margin-bottom: 1.2rem;
+  font-size: .85rem;
+  letter-spacing: .12em;
+  color: rgba(255,255,255,0.55);
+  margin-top: 20px;
+}
+
+.cta-home{
+  margin: 8rem 0;
+}
+.cta-home .btn{
+  margin-bottom: 1.5rem;
+}
+
 /* ==================================================
    5) All Games Page (A Game) - Game Cards
    注意：這裡開始改用 .game-card（不再用 .card）
@@ -289,6 +430,12 @@ nav [aria-current="page"]{
   border-radius:14px;
   padding:22px;
   box-shadow: 0 6px 9px rgba(0,0,0,0.3);
+}
+
+.game-card ul{
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
 }
 
 .card-left{
@@ -404,6 +551,39 @@ nav [aria-current="page"]{
     aspect-ratio:16 / 9;
   }
 }
+
+/*調整手機排版*/
+@media (max-width: 768px){
+  .game-card.card-media .card-right{
+    text-align: center;
+    align-items: center;   /*置中 */
+  }
+
+  .game-card.card-media .card-right .btn{
+    align-self: center;    
+  }
+}
+
+
+/* =========================
+   Scroll Reveal - Game Cards
+   ========================= */
+
+/* 初始狀態：還沒進畫面 */
+.game-card{
+  opacity: 0;
+  transform: translateY(-40px); /* 從上面來 */
+  transition:
+    opacity .6s ease,
+    transform .6s ease;
+}
+
+/* 已進畫面 */
+.game-card.is-visible{
+  opacity: 1;
+  transform: translateY(0);
+}
+
 
 /* ==================================================
    6) CTA / Footer
@@ -822,8 +1002,6 @@ footer{
 /* footer override on introduce style */
 footer{
   color:#fff;
-  font-size:12px;
-  padding: top 8px bottom 10px ;
   background:#000000;
 }
 
