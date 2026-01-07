@@ -1,6 +1,7 @@
 // Scroll reveal for game cards - 從下方淡入向上
 const cards = document.querySelectorAll('.game-card');
 
+
 const observer = new IntersectionObserver(
   (entries) => {
     entries.forEach(entry => {

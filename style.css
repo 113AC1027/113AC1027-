@@ -225,7 +225,7 @@ nav [aria-current="page"]{
 }
 
 .hero-text h1{
-  margin:0 !important;
+  margin-bottom:2rem !important;
   line-height:1.05;
   font-size: 40px;
   color:#15F5BA;
@@ -1000,6 +1000,7 @@ footer{
     gap: 16px !important;
   }
 }
+
 
 #prev{ left: 8px; }
 #next{ right: 8px; }
