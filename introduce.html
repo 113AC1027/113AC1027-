@@ -26,10 +26,10 @@
 
   <!-- ========== Hero ========== -->
   <section class="hero">
-    <img class="hero-img" src="images/undertale-2.jpg" alt="Hero image" />
+    <img class="hero-img" id="gameHeroImg" src="images/undertale-2.jpg" alt="Hero image" />
     <div class="hero-text">
-      <h1>UNDERTALE</h1>
-      <p>Every choice matters.</p>
+      <h1 id="gameTitle"></h1>
+      <p id="gameSubtitle"></p>
     </div>
 
     <div class="scroll-hint">
@@ -44,17 +44,9 @@
     <section class="creator">
       <h2>Independent Game Creator</h2>
 
-      <img
-        class="creator-img"
-        src="images/undertale.jpg"
-        alt="Game cover image"
-      />
+      <img class="creator-img" id="gameCreatorImg" src="" alt="Game cover image" />
 
-      <p>
-        UNDERTALE is an indie RPG created by Toby Fox.
-        It is known for its emotional storytelling and its unique system
-        that allows players to choose mercy over violence.
-      </p>
+      <p id="gamedesc"></p>
     </section>
 
     <!-- ===== Game Introduction Carousel ===== -->
@@ -67,69 +59,8 @@
         <!-- 可視範圍 -->
         <div id="viewport" class="introdution-viewport">
           <!-- 軌道 -->
-          <div id="track" class="introdution-track">
+          <div id="track" class="introdution-track"></div>
 
-            <!-- Card 1 -->
-            <article class="card intro-card">
-              <div class="card-inner">
-                <h3 class="card-title">Game Features</h3>
-
-                <div class="card-body">
-                  <div class="thumb">
-                    <img src="images/undertale.jpg" alt="Game features image" />
-                  </div>
-
-                  <div class="desc">
-                    <p>
-                      A unique combat system that combines turn-based battles
-                      with bullet-hell mechanics.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </article>
-
-            <!-- Card 2 -->
-            <article class="card intro-card">
-              <div class="card-inner">
-                <h3 class="card-title">Story Highlights</h3>
-
-                <div class="card-body">
-                  <div class="thumb">
-                    <img src="images/undertale.jpg" alt="Story image" />
-                  </div>
-
-                  <div class="desc">
-                    <p>
-                      Every choice affects the story.
-                      Your actions determine the ending you will reach.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </article>
-
-            <!-- Card 3 -->
-            <article class="card intro-card">
-              <div class="card-inner">
-                <h3 class="card-title">Gameplay</h3>
-
-                <div class="card-body">
-                  <div class="thumb">
-                    <img src="images/undertale.jpg" alt="Gameplay image" />
-                  </div>
-
-                  <div class="desc">
-                    <p>
-                      Players can fight, act, or show mercy.
-                      Sometimes, not fighting is the best choice.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </article>
-
-          </div>
         </div>
 
         <!-- 控制按鈕 -->
@@ -147,9 +78,11 @@
   </footer>
 
   <!-- ========== Scripts ========== -->
-  <script src="carousel.js"></script>
+  <!-- <script src="carousel.js"></script> -->
 
-  
+  <script src="introduce-data.js"></script>
+  <script src="introduce.js"></script>
+  <script src="carousel.js"></script>
 </body>
 </html>
 
