@@ -281,9 +281,10 @@ nav [aria-current="page"]{
 }
 
 .scroll-text{
-  font-size: 1rem;
-  letter-spacing: .12em;
+  font-size: 0.9rem;
+  letter-spacing: .08em;
   color: rgba(255,255,255,0.45);
+  font-style: bold;
 }
 .scroll-arrow{
   display: inline-block;
@@ -450,15 +451,38 @@ nav [aria-current="page"]{
 
   /* 這裡是「固定狀態」：不做 hover 動畫 */
   transform: rotate(-6deg);
+
+    /* 添加漂浮動畫 */
+  animation: gentleFloat 6s ease-in-out infinite;
+  
+  /* 平滑的移動 */
+  transition: transform 0.1s ease-out;
+  will-change: transform;
 }
 
 /* 每張圖只管「放哪裡」 */
-.what-float.p1{ top: 30px; left: 20px; transform: rotate(-10deg); }
-.what-float.p2{ top: 20px; right: 70px; transform: rotate(10deg); }
-.what-float.p3{ bottom: -90px; left: -3px; transform: rotate(7deg); }
-.what-float.p4{ bottom: -5pc; right: 30px; transform: rotate(-8deg); }
-.what-float.p5{ bottom: -10pc; left: 310px; transform: rotate(-10deg); }
-.what-float.p6{ top: 5pc; right: 270px; transform: rotate(25deg); }
+.what-float.p1{ top: 30px; left: 20px; transform: rotate(-10deg); animation-duration: 5s;}
+.what-float.p2{ top: 20px; right: 70px; transform: rotate(10deg); animation-duration: 6s;}
+.what-float.p3{ bottom: -90px; left: -3px; transform: rotate(7deg); animation-duration: 7s;}
+.what-float.p4{ bottom: -5pc; right: 30px; transform: rotate(-8deg); animation-duration: 8s;}
+.what-float.p5{ bottom: -10pc; left: 310px; transform: rotate(-10deg); animation-duration: 5.5s;}
+.what-float.p6{ top: 5pc; right: 270px; transform: rotate(25deg); animation-duration: 6s;}
+
+@keyframes gentleFloat{
+  0%, 100% { 
+    transform: translateY(0) scale(1);
+  }
+  50% { 
+    transform: translateY(-20px) scale(1.02);
+  }
+}
+
+/* hover 時的互動效果 */
+.what-float:hover{
+  opacity: .4;
+  filter: blur(0px);
+  animation-play-state: paused;
+}
 
 /* 平板：縮小一點、淡一點 */
 @media (max-width: 1024px){
