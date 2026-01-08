@@ -1,13 +1,15 @@
-
 <!doctype html>
 <html lang="zh-Hant">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Indie Game — Wireframe 起手式</title>
+  <title>Independent Game</title>
   <link rel="stylesheet" href="style.css" />
   <script src="scroll-reveal.js"></script>
   <script src="parallax-float.js"></script>
+  <script src="header-auto-hide.js"></script>
+  <script src="dropDownList.js"></script>
 </head>
 
 <body>
@@ -20,7 +22,18 @@
         <ul>
           <li><a href="index.html" aria-current="page" class="nav-link active">HOME</a></li>
           <li><a href="all games.html" class="nav-link">Games</a></li>
-          <li><a href="introduce.html" class="nav-link">introduce</a></li>
+          <li class="dropdown">
+            <button class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+              Introduce
+            </button>
+
+            <ul class="dropdown-menu" aria-label="Introduce 子選單">
+              <li><a href="about.html">UT</a></li>
+              <li><a href="team.html">Hollow</a></li>
+              <li><a href="history.html">Detention</a></li>
+              <li><a href="contact.html">Me</a></li>
+            </ul>
+          </li>
         </ul>
       </nav>
     </div>
@@ -31,7 +44,9 @@
     <img class="hero-img" src="images/封面.jpg" alt="Hero image" />
     <div class="hero-text">
       <h1> Independent Game Introduction</h1>
-      <p>An independent game studio crafting bold worlds, thoughtful mechanics, and emotional stories. We build player-first experiences through experimentation, care, and craft—games made with heart, curiosity, and respect for your time.</p>
+      <p>An independent game studio crafting bold worlds, thoughtful mechanics, and emotional stories. We build
+        player-first experiences through experimentation, care, and craft—games made with heart, curiosity, and respect
+        for your time.</p>
     </div>
 
     <div class="scroll-hint">
@@ -43,22 +58,25 @@
   <!-- ========== Main Content ========== -->
   <main>
     <!-- 1) What is indie game -->
-     <section class="what-decor">
+    <section class="what-decor">
       <div class="what-box">
         <section class="HomeCard">
           <h2>What is independent game?</h2>
           <p>
-            An indie game is a video game created by individuals or small teams without the financial support of a major publisher.
-            Developers have full creative control over their projects, which allows them to explore unique ideas and experimental designs.
-            Although indie games are usually made with limited budgets, they often stand out for their creativity, storytelling, and emotional depth.
+            An indie game is a video game created by individuals or small teams without the financial support of a major
+            publisher.
+            Developers have full creative control over their projects, which allows them to explore unique ideas and
+            experimental designs.
+            Although indie games are usually made with limited budgets, they often stand out for their creativity,
+            storytelling, and emotional depth.
           </p>
         </section>
       </div>
 
       <!-- 裝飾浮圖（不當按鈕用，純裝飾） -->
-      <img class="what-float p1" src="images/undertale-2.jpg" alt="" aria-hidden="true">
-      <img class="what-float p2" src="images/Hollow_Knight-2.png" alt="" aria-hidden="true">
-      <img class="what-float p3" src="images/celeste-2.jpg" alt="" aria-hidden="true">
+      <img class="what-float p1" src="images/hollow.png" alt="" aria-hidden="true">
+      <img class="what-float p2" src="images/maxresdefault.png" alt="" aria-hidden="true">
+      <img class="what-float p3" src="images/sword.png" alt="" aria-hidden="true">
       <img class="what-float p4" src="images/To the Moon.jpg" alt="" aria-hidden="true">
       <img class="what-float p5" src="images/返校-2.jpg" alt="" aria-hidden="true">
       <img class="what-float p6" src="images/TheBindingOfIsaac-2.jpg" alt="" aria-hidden="true">
@@ -66,14 +84,16 @@
 
 
     <!-- 2) Why indie game is unique -->
-     <section class="what-decor">
+    <section class="what-decor">
       <div class="what-box">
         <section class="HomeCard">
           <h2>Why is independent game so unique?</h2>
           <p>
             Independent games are unique because they are driven by creativity rather than profit.
-            Without pressure from large publishers, developers can take risks, tell personal stories, and experiment with gameplay.
-            This freedom allows indie games to explore new emotions, ideas, and artistic styles that big studios often avoid.
+            Without pressure from large publishers, developers can take risks, tell personal stories, and experiment
+            with gameplay.
+            This freedom allows indie games to explore new emotions, ideas, and artistic styles that big studios often
+            avoid.
           </p>
         </section>
       </div>
@@ -81,12 +101,12 @@
       <!-- 裝飾浮圖（不當按鈕用，純裝飾） -->
       <!-- <img class="what-float p1" src="images/undertale-2.jpg" alt="" aria-hidden="true"> -->
       <!-- <img class="what-float p2" src="images/Hollow_Knight-2.png" alt="" aria-hidden="true"> -->
-      <img class="what-float p3" src="images/gris.jpg" alt="" aria-hidden="true">
+      <img class="what-float p3" src="images/heart.png" alt="" aria-hidden="true">
       <img class="what-float p4" src="images/Journey.jpg" alt="" aria-hidden="true">
-      <img class="what-float p5" src="images/Hades-2.jpg" alt="" aria-hidden="true">
-      <img class="what-float p6" src="images/Spiritfarer-2.jpg" alt="" aria-hidden="true">
+      <img class="what-float p5" src="images/OldMan.png" alt="" aria-hidden="true">
+      <img class="what-float p6" src="images/paper please.png" alt="" aria-hidden="true">
     </section>
-    
+
 
     <!-- 3) Related events -->
     <section class="HomeCard">
@@ -121,5 +141,5 @@
     <div class="container">© 2025 TUNA Company. All rights reserved.</div>
   </footer>
 </body>
-</html>
 
+</html>

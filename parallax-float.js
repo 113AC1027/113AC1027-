@@ -4,6 +4,22 @@ const floatImages = document.querySelectorAll('.what-float');
 // 為每張圖片設定不同的速度係數
 const speeds = [0.3, 0.5, 0.2, 0.6, 0.4, 0.35];
 
+// 為每張圖片生成隨機旋轉角度和方向
+const rotations = [];
+floatImages.forEach((img, index) => {
+  // 隨機角度範圍: -8度 到 +8度
+  const randomRotation = (Math.random() - 0.5) * 16;
+  rotations[index] = randomRotation;
+    // 儲存到 CSS 變數中供動畫使用
+  img.style.setProperty('--rotation-start', `${randomRotation}deg`);
+  img.style.setProperty('--rotation-mid', `${randomRotation + (Math.random() - 0.5) * 6}deg`);
+  img.style.setProperty('--rotation-end', `${randomRotation}deg`);
+  
+  // 為每張圖片添加不同的動畫延遲
+  img.style.animationDelay = `${index * 0.2}s`;
+});
+
+
 function updateParallax() {
   const scrolled = window.pageYOffset;
   
@@ -16,8 +32,8 @@ function updateParallax() {
       const speed = speeds[index] || 0.3;
       const yPos = -(scrolled * speed);
       
-      // 應用視差效果
-      img.style.transform = `translateY(${yPos}px) rotate(${img.dataset.rotation || 0}deg)`;
+      // 應用視差效果(保持旋轉)
+      img.style.transform = `translateY(${yPos}px) rotate(${rotation}deg)`;
     }
   });
 }
