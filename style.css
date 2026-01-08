@@ -89,7 +89,32 @@ p{ margin:.25rem 0; }
   will-change: transform;
 }
 
+.btn-2{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap: .4rem;
+
+  background-color:#15F5BA;
+  color:#080847;
+  padding:.75rem 2rem;
+  border-radius:999px;
+  text-decoration:none;
+  border:1px solid rgba(0,0,0,0.2);
+  font-weight:600;
+
+  transition: transform .18s ease, filter .18s ease, box-shadow .18s ease, background-color .18s ease;
+  will-change: transform;
+}
+
 .btn:hover{
+  background-color:#81fef7;
+  transform: translateY(-2px) scale(1.06);
+  filter: brightness(1.05);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.28);
+}
+
+.btn-2:hover{
   background-color:#81fef7;
   transform: translateY(-2px) scale(1.06);
   filter: brightness(1.05);
