@@ -195,6 +195,10 @@
   color: #15F5BA;
 }
 
+.hidden {
+  display: none !important;
+}
+
 /* ==================================================
    Member Page Layout
    個人頁
