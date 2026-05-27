@@ -1,0 +1,118 @@
+/* ==================================================
+   base.css
+   Reset / Global / Common Components
+   ================================================== */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  overflow-x: hidden;
+}
+
+@font-face {
+  font-family: 'Senobi-Gothic-Medium';
+  src: url('../fonts/Senobi-Gothic-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Berlin Sans';
+  src: url('../fonts/BRLNSR.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --container: 1200px;
+  --bg: #080847;
+  --ink: #fff;
+  --muted: #15F5BA;
+  --surface: #FDF4E3;
+  --border: #15F5BA;
+  --brand: #15F5BA;
+  --cta: #15F5BA;
+}
+
+body {
+  margin: 0;
+  padding-top: 60px; /* 高度約等於 fixed header */
+  font-family: 'Senobi-Gothic-Medium', system-ui, -apple-system, Segoe UI, Roboto, Noto Sans TC, "PingFang TC", "Microsoft JhengHei", Arial, sans-serif;
+  line-height: 1.6;
+  color: #fff;
+  background: var(--bg);
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.container {
+  width: min(100% - 2rem, var(--container));
+  margin-inline: auto;
+}
+
+.container h2 {
+  color: #15F5BA;
+}
+
+.container p {
+  color: #fff;
+}
+
+.section {
+  padding: 64px 0;
+}
+
+#support {
+  margin-top: 100px;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0 0 .5rem;
+}
+
+p {
+  margin: .25rem 0;
+}
+
+/* Button */
+.btn,
+.btn-2 {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .4rem;
+  background-color: #15F5BA;
+  color: #080847;
+  padding: .75rem 2rem;
+  border-radius: 999px;
+  text-decoration: none;
+  border: 1px solid rgba(0,0,0,0.2);
+  font-weight: 600;
+  transition: transform .18s ease, filter .18s ease, box-shadow .18s ease, background-color .18s ease;
+  will-change: transform;
+}
+
+.btn:hover,
+.btn-2:hover {
+  background-color: #81fef7;
+  transform: translateY(-2px) scale(1.06);
+  filter: brightness(1.05);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.28);
+}
+
+.btn:focus-visible,
+.btn-2:focus-visible {
+  outline: 3px solid rgba(21,245,186,0.55);
+  outline-offset: 3px;
+}
