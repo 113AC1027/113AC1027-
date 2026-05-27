@@ -1,0 +1,29 @@
+/* ==================================================
+   footer.css
+   CTA / Footer
+   ================================================== */
+
+.cta {
+  margin-top: 200px;
+  margin-bottom: 100px;
+  background: #000000;
+  border-block: 1px solid var(--border);
+  text-align: center;
+}
+
+.cta h2 {
+  font-size: clamp(24px, 3.6vw, 40px);
+}
+
+.cta p {
+  color: var(--muted);
+}
+
+footer {
+  background: #000000;
+  color: #fff;
+  padding: 24px 0;
+  text-align: center;
+  margin-top: 40px;
+  font-size: 0.8rem;
+}

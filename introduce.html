@@ -5,7 +5,13 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Indie Game — Game Introduction</title>
-  <link rel="stylesheet" href="style.css" />
+  <!-- <link rel="stylesheet" href="style.css" /> -->
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/header.css" />
+  <link rel="stylesheet" href="css/hero.css" />
+  <link rel="stylesheet" href="css/introduce.css" />
+  <link rel="stylesheet" href="css/footer.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
 </head>
 
 <body>
@@ -16,13 +22,13 @@
 
       <nav aria-label="主導覽" class="main-nav">
         <ul>
-          <li><a href="index.html" class="nav-link active">Home</a></li>
+          <li><a href="index.html" class="nav-link">Home</a></li>
           <li><a href="all games.html" class="nav-link">Games</a></li>
+          
           <li class="dropdown">
-            <button class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+            <button class="nav-link dropdown-toggle active" aria-haspopup="true" aria-expanded="false">
               Introduce
             </button>
-
             <ul class="dropdown-menu" aria-label="Introduce 子選單">
               <li><a href="introduce.html?game=undertale">UNDERTALE</a></li>
               <li><a href="introduce.html?game=hollowknight">Hollow Knight</a></li>
@@ -32,6 +38,8 @@
               <li><a href="introduce.html?game=TheBindingOfIsaac">The Binding of Isaac</a></li>
             </ul>
           </li>
+
+          <li><a href="profile.php" class="nav-link">My Page</a></li>
         </ul>
       </nav>
     </div>
@@ -99,9 +107,12 @@
   <!-- ========== Scripts ========== -->
   <!-- <script src="carousel.js"></script> -->
 
-  <script src="introduce-data.js"></script>
-  <script src="introduce.js"></script>
-  <script src="carousel.js"></script>
+  <script src="js/dropDownList.js"></script>
+  <script src="js/header-auto-hide.js"></script>
+
+  <script src="js/introduce-data.js"></script>
+  <script src="js/introduce.js"></script>
+  <script src="js/carousel.js"></script>
 </body>
 </html>
 
