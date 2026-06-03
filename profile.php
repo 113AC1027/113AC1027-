@@ -26,7 +26,7 @@ $isLogin = isset($_SESSION["username"]);
       <nav aria-label="主導覽" class="main-nav">
         <ul>
           <li><a href="index.html" class="nav-link">Home</a></li>
-          <li><a href="all games.html" class="nav-link">Games</a></li>
+          <li><a href="all games.php" class="nav-link">Games</a></li>
 
           <li class="dropdown">
             <button class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">
@@ -150,24 +150,32 @@ $isLogin = isset($_SESSION["username"]);
 
           <!-- 右側：內容區 -->
           <section class="member-content">
-            <p class="profile-label">Member Profile</p>
-            <h2>My Indie Game Space</h2>
+            <div class="profile-tabs-layout">
 
-            <div class="member-grid">
-              <div class="profile-block">
-                <h3>My Comments</h3>
-                <p>No comments yet.</p>
+              <div class="profile-tabs">
+                <button class="profile-tab active" type="button" data-tab="comments">
+                  My Comments
+                </button>
+
+                <button class="profile-tab" type="button" data-tab="favorites">
+                  Favorite Games
+                </button>
               </div>
 
-              <div class="profile-block">
-                <h3>My Reactions</h3>
-                <p>No reactions yet.</p>
+              <div class="profile-tab-content">
+
+                <section class="tab-panel active" id="comments">
+                  <h2>My Comments</h2>
+                  <p>No comments yet.</p>
+                </section>
+
+                <section class="tab-panel" id="favorites">
+                  <h2>Favorite Games</h2>
+                  <p>No favorite games yet.</p>
+                </section>
+
               </div>
 
-              <div class="profile-block">
-                <h3>Favorite Games</h3>
-                <p>No favorite games yet.</p>
-              </div>
             </div>
           </section>
 
@@ -184,5 +192,6 @@ $isLogin = isset($_SESSION["username"]);
   <script src="js/dropDownList.js"></script>
   <script src="js/header-auto-hide.js"></script>
   <script src="js/login-modal.js"></script>
+  <script src="js/profile-tabs.js"></script>
 </body>
 </html>

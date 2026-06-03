@@ -23,7 +23,7 @@
 
 .game-card {
   width: 75%;
-  max-width: 900px;
+  max-width: 1200px;
   background: #153354;
   border: 1px solid #15F5BA;
   border-radius: 14px;
@@ -167,6 +167,159 @@
   flex: 1;
   text-align: left;
 }
+
+.card-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.card-actions .btn {
+  margin: 0;
+}
+
+.comment-toggle {
+  padding: 10px 28px;
+  font-size: 0.85rem;
+  min-width: 130px;
+}
+
+.comment-panel {
+  display: none;
+  margin-top: 16px;
+  padding: 24px;
+  border: 1px solid rgba(21, 245, 186, 0.65);
+  border-radius: 18px;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.game-item.is-open .comment-panel {
+  display: block;
+}
+
+.comment-toggle {
+  margin-top: 16px;
+}
+
+/* =========================
+   Comments Panel
+   ========================= */
+
+.game-item {
+  width: min(90%, 1100px);
+  margin: 0 auto;
+}
+
+.game-item .game-card {
+  width: 100%;
+}
+
+.comment-panel {
+  display: none;
+
+  margin-top: 14px;
+  padding: 24px;
+
+  border: 1px solid rgba(21, 245, 186, 0.55);
+  border-radius: 18px;
+
+  background: rgba(0, 0, 0, 0.35);
+  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.35);
+}
+
+.game-item.is-open .comment-panel {
+  display: block;
+}
+
+.comment-form {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 14px;
+  align-items: end;
+}
+
+.comment-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 0.9rem;
+  letter-spacing: 0.12em;
+}
+
+.comment-form textarea {
+  min-height: 70px;
+  resize: vertical;
+
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(21, 245, 186, 0.45);
+
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  font-family: inherit;
+}
+
+.comment-form textarea:focus {
+  outline: none;
+  border-color: #15F5BA;
+  box-shadow: 0 0 0 3px rgba(21, 245, 186, 0.16);
+}
+
+.comment-list {
+  margin-top: 24px;
+  display: grid;
+  gap: 12px;
+
+  max-height: 200px;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+.comment-item {
+  padding: 16px 18px;
+  border-radius: 14px;
+  border: 1px solid rgba(21, 245, 186, 0.25);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.comment-user {
+  margin: 0 0 6px;
+  color: #15F5BA;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.comment-text {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.86);
+  line-height: 1.7;
+}
+
+.comment-time {
+  margin: 0;
+  color: rgba(153, 153, 153, 0.86);
+  line-height: 1.7;
+  font-size: 12px;
+}
+
+@media (max-width: 768px) {
+  .comment-form {
+    grid-template-columns: 1fr;
+  }
+
+  .comment-form .btn {
+    width: 100%;
+  }
+
+  .comment-panel {
+    padding: 18px;
+  }
+}
+
 
 @media (max-width: 768px) {
   .game-card { width: 90%; }
