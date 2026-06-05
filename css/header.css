@@ -57,7 +57,7 @@ header.header-visible:not(.at-top) {
 .topbar a {
   color: #fff;
   text-decoration: none;
-  opacity: .9;
+  /* opacity: .9; */
 }
 
 .topbar a:hover {
@@ -103,6 +103,8 @@ nav [aria-current="page"] {
 }
 
 .dropdown-toggle {
+  -webkit-appearance: none;
+appearance: none;
   position: relative;
   color: rgba(255,255,255,0.7);
   text-decoration: none;
@@ -115,11 +117,13 @@ nav [aria-current="page"] {
   font-family: inherit;
   font-size: inherit;
   transition: color .2s ease, background-color .2s ease, transform .2s ease;
+  align-self: center;   /* ← 加這行，修偏下方 */
 }
 
 .dropdown-toggle:hover {
   color: #ffffff;
   background-color: rgba(21, 245, 185, 0.212);
+  transform: none; 
 }
 
 .dropdown.open .dropdown-toggle {

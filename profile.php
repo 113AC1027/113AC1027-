@@ -166,7 +166,38 @@ $isLogin = isset($_SESSION["username"]);
 
                 <section class="tab-panel active" id="comments">
                   <h2>My Comments</h2>
-                  <p>No comments yet.</p>
+                  <?php
+                  $commentFile = "comments.txt";
+                  $hasComments = false;
+
+                  if(file_exists($commentFile))
+                    {
+                      $lines = file($commentFile, FILE_IGNORE_NEW_LINES |FILE_SKIP_EMPTY_LINES);
+                      foreach ($lines as $line)
+                        {
+                          $parts = explode("|", $line);
+                          $savedUsername = $parts[0] ?? "";
+                          $savedGame = $parts[1] ?? "";
+                          $savedComment = $parts[2] ?? "";
+                          $savedTime = $parts[3] ?? "";
+
+                          if($savedUsername === $_SESSION["username"])
+                            {
+                              $hasComments = true;
+                              echo '<div class="comment-item">';
+                              echo '<p class="comment-user">' . htmlspecialchars($savedGame) . '</p>';
+                              echo '<p class="comment-text">' . htmlspecialchars($savedComment) . '</p>';
+                              echo '<p class="comment-time">' . htmlspecialchars($savedTime) . '</p>';
+                              echo '</div>';
+                            }
+                        }
+                    }
+
+                    if (!$hasComments)
+                      {
+                        echo '<p>No comments yet.</p>';
+                      }
+                  ?>
                 </section>
 
                 <section class="tab-panel" id="favorites">

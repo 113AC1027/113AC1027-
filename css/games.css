@@ -79,6 +79,7 @@
   animation: learnMorePulse 2.4s ease-in-out infinite;
 }
 
+
 /* 滑鼠移到卡片時，按鈕變得更明顯 */
 @media (hover: hover) {
   .game-card:hover .btn {
