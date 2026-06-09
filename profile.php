@@ -2,7 +2,17 @@
 session_start();
 
 $isLogin = isset($_SESSION["username"]);
+$_likedGames= [];
+if (isset($_SESSION['username']) && file_exists('likes.txt')) {
+    foreach (file('likes.txt', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $line) {
+        $parts = explode('|', $line, 2);
+        if (($parts[0] ?? '') === $_SESSION['username']) {
+            $_likedGames[] = $parts[1];
+        }
+    }
+}
 ?>
+
 
 <!doctype html>
 <html lang="zh-Hant">
@@ -202,7 +212,21 @@ $isLogin = isset($_SESSION["username"]);
 
                 <section class="tab-panel" id="favorites">
                   <h2>Favorite Games</h2>
-                  <p>No favorite games yet.</p>
+                  <div class = "favorites-list">
+                    <?php
+                    $hasFavorites = false;
+                    if(file_exists('likes.txt')){
+                      foreach(file('likes.txt', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $line){
+                        $parts = explode('|', $line, 2);
+                        if (($parts[0] ?? '') === $_SESSION['username']) {
+                        $hasFavorites = true;
+                        echo '<span class="btn">' . htmlspecialchars($parts[1]) . '</span>';
+                      }
+                    }
+                  }
+                  if (!$hasFavorites) echo '<p>No favorite games yet.</p>';
+                    ?>
+                  </div>
                 </section>
 
               </div>
