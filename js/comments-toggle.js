@@ -11,9 +11,10 @@ commentButtons.forEach(function (button) {
 });
 
 // 頁面載入時還原已 liked 狀態
+const _liked = (typeof likedGames !== 'undefined') ? likedGames : [];
 document.querySelectorAll('.btn.like').forEach(btn => {
   const game = btn.closest('.game-item')?.dataset.game;
-  if (game && likedGames.includes(game)) {
+  if (game && _liked.includes(game)) {
     btn.classList.add('liked');
   }
 });

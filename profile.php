@@ -212,19 +212,31 @@ if (isset($_SESSION['username']) && file_exists('likes.txt')) {
 
                 <section class="tab-panel" id="favorites">
                   <h2>Favorite Games</h2>
-                  <div class = "favorites-list">
+                  <div class="favorites-list">
                     <?php
+                    $gameUrlMap = [
+                      'undertale'         => 'undertale',
+                      'Hollow_Knight'     => 'hollowknight',
+                      'Hades'             => 'Hades',
+                      'Detention'         => 'Detention',
+                      'celeste'           => 'celeste',
+                      'TheBindingOfIsaac' => 'TheBindingOfIsaac',
+                    ];
+
                     $hasFavorites = false;
-                    if(file_exists('likes.txt')){
-                      foreach(file('likes.txt', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $line){
+                    if (file_exists('likes.txt')) {
+                      foreach (file('likes.txt', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $line) {
                         $parts = explode('|', $line, 2);
                         if (($parts[0] ?? '') === $_SESSION['username']) {
-                        $hasFavorites = true;
-                        echo '<span class="btn">' . htmlspecialchars($parts[1]) . '</span>';
+                          $hasFavorites = true;
+                          $key = $parts[1];
+                          $url = $gameUrlMap[$key] ?? $key;
+                          echo '<a class="btn" href="introduce.html?game=' . urlencode($url) . '">'
+                             . htmlspecialchars($key) . '</a>';
+                        }
                       }
                     }
-                  }
-                  if (!$hasFavorites) echo '<p>No favorite games yet.</p>';
+                    if (!$hasFavorites) echo '<p>No favorite games yet.</p>';
                     ?>
                   </div>
                 </section>
